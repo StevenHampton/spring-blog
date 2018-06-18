@@ -16,17 +16,22 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public @ResponseBody String postsById(@PathVariable int id){
-        return String.format("view an individual post, ID page: %d", id);
+    public @ResponseBody String showDetails(@PathVariable long id){
+        return "view an individual post #" + id;
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public @ResponseBody String edit(@PathVariable long id){
+        return "View the from for editing post #" + id;
     }
 
     @GetMapping("/posts/create")
-    public @ResponseBody String createPost(){
+    public @ResponseBody String create(){
         return "View the form for creating a post";
     }
 
     @PostMapping("/posts/create")
-    public @ResponseBody String create(){
-        return "create a new post";
+    public @ResponseBody String savePost(){
+        return "Saving to the databases";
     }
 }
