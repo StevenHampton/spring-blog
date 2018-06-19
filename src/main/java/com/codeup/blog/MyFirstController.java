@@ -9,37 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MyFirstController {
 
-    @GetMapping("/say-hello")
-    public @ResponseBody String myFirstSpringView() {
-        return "Hello from Spring!";
-    }
-
     @GetMapping("/hello/{name}")
     public String sayHello(@PathVariable String name, Model model) {
         model.addAttribute("name", name);
         return "hello";
     }
 
-    @GetMapping("/say-hello/{name}")
-    public @ResponseBody String sayHello(@PathVariable String name){
-        return String.format("Hello, %s!", name);
-    }
-
-    @GetMapping("/flights/from/{from}/to/{to}")
-    public @ResponseBody String getFlights(
-            @PathVariable String from,
-            @PathVariable String to
-    ) {
-        return String.format("Finding flights from %s to %s...", from, to);
-    }
-
-    @GetMapping("/say-goodbye")
-    public @ResponseBody String mySecondSpringView() {
-        return "Goodbye World!";
-    }
-
-    @GetMapping("increment/{n}")
-    public @ResponseBody String increment(@PathVariable int n){
-        return String.format("%d + 1 = %d", n, n + 1);
+    @GetMapping("/hello/")
+    public String sayHello() {
+        return "hello";
     }
 }

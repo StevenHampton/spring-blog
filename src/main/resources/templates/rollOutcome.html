@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header(${'Result'})" />
+<body>
+
+<h1>
+    You guessed <span th:text="${userGuess}"></span>. The
+    roll was a <span th:text="${diceRoll}"></span>,
+    <span th:text="${rollGuess}"></span>
+    <form method = "Get" action="/roll-dice/">
+        <input type="submit" value="Roll Again"  />
+    </form>
+</h1>
+
+</body>
+</html>

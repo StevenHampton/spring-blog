@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header(${'All Posts'})" />
+<body>
+<h1>Viewing all posts</h1>
+<div th:each="post : ${posts}" class="card col-6" style="margin: 10px auto; padding: 0;">
+    <div class="card-header text-white bg-primary">
+    <h3><span th:text="${post.title}"></span></h3>
+    </div>
+    <div class="card-body">
+    <p><span th:text="${post.body}"></span></p>
+    </div>
+</div>
+<div th:replace="fragments ::footer" />
+</body>
+</html>

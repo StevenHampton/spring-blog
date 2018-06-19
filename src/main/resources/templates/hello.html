@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
-</head>
+<head th:replace="fragments :: header(${'Hello'})" />
 <body>
-
 <h1>Hello, <span th:text="${name}">World</span>!</h1>
-
+<div th:replace="fragments ::footer" />
 </body>
 </html>

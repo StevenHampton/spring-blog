@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: header(${'Show Post'})" />
+<body>
+<h1>Viewing Post number <span th:text="${id}"></span></h1>
+<h2><span th:text="${postTitle}"></span></h2>
+<p><span th:text="${postBody}"></span></p>
+<div th:replace="fragments ::footer" />
+</body>
+</html>
