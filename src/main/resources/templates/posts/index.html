@@ -10,6 +10,7 @@
     <div class="card-body">
     <p><span th:text="${post.body}"></span></p>
     </div>
+    <input type="hidden" name="id" value="${post.id}" />
 </div>
 <div th:replace="fragments ::footer" />
 </body>

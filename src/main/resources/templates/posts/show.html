@@ -3,8 +3,17 @@
 <head th:replace="fragments :: header(${'Show Post'})" />
 <body>
 <h1>Viewing Post number <span th:text="${id}"></span></h1>
-<h2><span th:text="${postTitle}"></span></h2>
-<p><span th:text="${postBody}"></span></p>
+
+<div class="card col-6" style="margin: 10px auto; padding: 0;">
+    <div class="card-header text-white bg-primary">
+        <h3><span th:text="${post.title}"></span></h3>
+    </div>
+    <div class="card-body">
+        <p><span th:text="${post.body}"></span></p>
+        <p><span th:text="${post.id}"></span></p>
+    </div>
+    <input type="hidden" name="id" value="${post.id}" />
+</div>
 <div th:replace="fragments ::footer" />
 </body>
 </html>
