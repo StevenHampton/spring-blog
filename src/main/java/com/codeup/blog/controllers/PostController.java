@@ -1,5 +1,6 @@
 package com.codeup.blog.controllers;
 
+import com.codeup.blog.PostService;
 import com.codeup.blog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,22 +12,21 @@ import java.util.List;
 @Controller
 public class PostController {
 
+    private PostService postService;
 
-    @RequestMapping(path="/posts", method= RequestMethod.GET)
+    public PostController(PostService postService){
+        this.postService = postService;
+    }
+
+    @GetMapping("/posts")
     public String postsIndex(Model view) {
-        List<Post> posts = new ArrayList<>();
-        Post post1 = new Post("Test Post #1","Random body stuff #1");
-        Post post2 = new Post("Test Post #2","Random body stuff #2");
-        posts.add(post1);
-        posts.add(post2);
-        view.addAttribute("posts", posts);
+        view.addAttribute("posts", postService.findAll());
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String showDetails(@PathVariable long id, Model view) {
-        Post post = new Post(id,"Test Post","Random body stuff");
-        view.addAttribute("post", post);
+        view.addAttribute("post", postService.findOne(id));
         return "posts/show";
     }
 
@@ -47,4 +47,5 @@ public class PostController {
     String savePost() {
         return "Saving to the databases";
     }
+
 }
