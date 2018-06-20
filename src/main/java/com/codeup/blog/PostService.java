@@ -2,7 +2,6 @@ package com.codeup.blog;
 
 import com.codeup.blog.models.Post;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +29,8 @@ public class PostService {
     }
 
     private void createPosts() {
-        Post post1 = new Post(1,"First Post!","Lots of stuff and stuff");
-        Post post2 = new Post(2,"Second Post","I think I'm getting the hang of this now");
-        Post post3 = new Post(3,"Third Post","I definitely have it now!");
-        save(post1);
-        save(post2);
-        save(post3);
+        posts.add(new Post(1,"First Post!","Lots of stuff and stuff"));
+        posts.add(new Post(2,"Second Post","I think I'm getting the hang of this now"));
+        posts.add(new Post(3,"Third Post","I definitely have it now!"));
     }
 }

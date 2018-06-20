@@ -5,7 +5,6 @@ import com.codeup.blog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,21 +30,22 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public @ResponseBody
-    String edit(@PathVariable long id) {
-        return "View the from for editing post #" + id;
+    public String edit(@PathVariable long id, Model view) {
+        Post post = postService.findOne(id);
+        view.addAttribute("post", post);
+        return "posts/edit";
     }
 
     @GetMapping("/posts/create")
-    public @ResponseBody
-    String create() {
-        return "View the form for creating a post";
+    public String create(Model view) {
+        view.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public @ResponseBody
-    String savePost() {
-        return "Saving to the databases";
+    public String savePost(@ModelAttribute Post post) {
+        postService.save(post);
+        return "redirect:/posts";
     }
 
 }
