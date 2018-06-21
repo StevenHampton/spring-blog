@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: header(${'Show Post'})" />
 <body>
+<nav th:replace="fragments :: navbar" />
 <h1>Viewing Post number <span th:text="${post.id}"></span></h1>
 
 <div class="card col-6" style="margin: 10px auto; padding: 0;">

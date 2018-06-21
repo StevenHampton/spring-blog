@@ -22,6 +22,10 @@ public class PostController {
         view.addAttribute("posts", postService.findAll());
         return "posts/index";
     }
+    @PostMapping("/posts")
+    public String selectToEdit(@RequestParam(name = "id") long id){
+        return "redirect:/posts/" + id + "/edit";
+    }
 
     @GetMapping("/posts/{id}")
     public String showDetails(@PathVariable long id, Model view) {

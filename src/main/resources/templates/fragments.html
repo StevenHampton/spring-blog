@@ -6,18 +6,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous" />
-    <style>
-        h1{
-            text-align: center;
-        }
-    </style>
+    <!--STYLE-->
+    <link rel="stylesheet" type="text/css" href="style/mainStyle.css" />
 </head>
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-light">
     <ul class="navbar-nav">
-        <li class="nav-item"><a href="" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="" class="nav-link">Link 1</a></li>
-        <li class="nav-item"><a href="" class="nav-link">link 2</a></li>
+        <li class="nav-item"><a href="http://localhost:8080/home" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="http://localhost:8080/posts" class="nav-link">Posts</a></li>
+        <li class="nav-item"><a href="http://localhost:8080/posts/create" class="nav-link">Create Post</a></li>
     </ul>
 </nav>
 
