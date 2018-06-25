@@ -6,14 +6,20 @@
 <h1>Viewing Post number <span th:text="${post.id}"></span></h1>
 
 <div class="card col-6" style="margin: 10px auto; padding: 0;">
+    <form method="get" th:action="@{'/posts/' + ${post.id} + '/edit'}">
     <div class="card-header text-white bg-primary">
         <h3><span th:text="${post.title}"></span></h3>
     </div>
     <div class="card-body">
         <p><span th:text="${post.body}"></span></p>
-        <p><span th:text="${post.id}"></span></p>
     </div>
-    <input type="hidden" name="id" value="${post.id}" />
+    <input type="hidden" name="id" th:value="${post.id}" />
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+    <form method="post" th:action="@{'/posts/' + ${post.id} + '/delete'}">
+        <input type="hidden" name="id" th:value="${post.id}" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 </div>
 <div th:replace="fragments ::footer" />
 </body>
