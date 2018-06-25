@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: header(${'Show Post'})" />
+<head th:replace="fragments :: header(${'Show Post'})"/>
 <body>
-<nav th:replace="fragments :: navbar" />
-<h1>Viewing Post number <span th:text="${post.id}"></span></h1>
+<div class="container col-12">
+    <nav th:replace="fragments :: navbar"/>
+    <h1>Viewing Post number <span th:text="${post.id}"></span></h1>
 
-<div class="card col-6" style="margin: 10px auto; padding: 0;">
-    <form method="get" th:action="@{'/posts/' + ${post.id} + '/edit'}">
-    <div class="card-header text-white bg-primary">
-        <h3><span th:text="${post.title}"></span></h3>
+    <div class="card col-6" style="margin: 10px auto; padding: 0;">
+        <div class="card-header text-white bg-primary">
+            <h3><span th:text="${post.title}"></span></h3>
+        </div>
+        <div class="card-body">
+            <h2>Posted by: <span th:text="${post.user.email}"></span></h2>
+            <p><span th:text="${post.body}"></span></p>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-6">
+                    <form method="get" th:action="@{'/posts/' + ${post.id} + '/edit'}">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <form method="post" th:action="@{'/posts/' + ${post.id} + '/delete'}">
+                        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <p><span th:text="${post.body}"></span></p>
-    </div>
-    <input type="hidden" name="id" th:value="${post.id}" />
-        <button type="submit" class="btn btn-primary">Edit</button>
-    </form>
-    <form method="post" th:action="@{'/posts/' + ${post.id} + '/delete'}">
-        <input type="hidden" name="id" th:value="${post.id}" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
 </div>
-<div th:replace="fragments ::footer" />
+<div th:replace="fragments ::footer"/>
 </body>
 </html>

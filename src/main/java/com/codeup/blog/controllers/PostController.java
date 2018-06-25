@@ -2,7 +2,9 @@ package com.codeup.blog.controllers;
 
 import com.codeup.blog.PostService;
 import com.codeup.blog.models.Post;
+import com.codeup.blog.models.User;
 import com.codeup.blog.repositories.PostRepository;
+import com.codeup.blog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.List;
 public class PostController {
 
     private PostService postService;
+    private UserRepository userRepository;
 
-    public PostController(PostService postService){
+    public PostController(PostService postService, UserRepository userRepository){
         this.postService = postService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/posts")
@@ -52,7 +56,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@ModelAttribute Post post) {
-        postService.editPost(post);
+        postService.save(post);
         return "redirect:/posts";
     }
 
@@ -64,6 +68,7 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String create(Model view) {
+        User user = userRepository.first();
         view.addAttribute("post", new Post());
         return "posts/create";
     }
@@ -74,14 +79,27 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    @GetMapping("/user/create")
+    public String createUser(Model view) {
+        view.addAttribute("user", new User());
+        return "posts/signUp";
+    }
+
+    @PostMapping("/user/create")
+    public String saveUser(@ModelAttribute User user) {
+        userRepository.save(user);
+        return "redirect:/posts";
+    }
+
+
     @GetMapping("/seed")
     public String seedPosts() {
-        postService.save(new Post("Choose the perfect design", "Create a beautiful blog that fits your style. Choose from a selection of easy-to-use templates – all with flexible layouts and hundreds of background images – or design something new."));
-        postService.save(new Post("Get a free domain", "Give your blog the perfect home. Get a free blogspot.com domain or buy a custom domain with just a few clicks."));
-        postService.save(new Post("Earn money", "Get paid for your hard work. Google AdSense can automatically display relevant targeted ads on your blog so that you can earn income by posting about your passion."));
-        postService.save(new Post("Know your audience", "Find out which posts are a hit with Blogger’s built-in analytics. You’ll see where your audience is coming from and what they’re interested in. You can even connect your blog directly to Google Analytics for a more detailed look."));
-        postService.save(new Post("Hang onto your memories", "Save the moments that matter. Blogger lets you safely store thousands of posts, photos, and more with Google for free."));
-        postService.save(new Post("Join millions of others", "Whether sharing your expertise, breaking news, or whatever’s on your mind, you’re in good company on Blogger. Sign up to discover why millions of people have published their passions here."));
+        postService.save(new Post("Choose the perfect design", "Create a beautiful blog that fits your style. Choose from a selection of easy-to-use templates – all with flexible layouts and hundreds of background images – or design something new.", userRepository.first()));
+        postService.save(new Post("Get a free domain", "Give your blog the perfect home. Get a free blogspot.com domain or buy a custom domain with just a few clicks.", userRepository.first()));
+        postService.save(new Post("Earn money", "Get paid for your hard work. Google AdSense can automatically display relevant targeted ads on your blog so that you can earn income by posting about your passion.", userRepository.first()));
+        postService.save(new Post("Know your audience", "Find out which posts are a hit with Blogger’s built-in analytics. You’ll see where your audience is coming from and what they’re interested in. You can even connect your blog directly to Google Analytics for a more detailed look.", userRepository.first()));
+        postService.save(new Post("Hang onto your memories", "Save the moments that matter. Blogger lets you safely store thousands of posts, photos, and more with Google for free.", userRepository.first()));
+        postService.save(new Post("Join millions of others", "Whether sharing your expertise, breaking news, or whatever’s on your mind, you’re in good company on Blogger. Sign up to discover why millions of people have published their passions here.", userRepository.first()));
         return "redirect:/posts";
     }
 

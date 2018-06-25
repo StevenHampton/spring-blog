@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: header(${'All Posts'})"/>
 <body>
-<div class="container">
+<div class="container col-12">
     <nav th:replace="fragments :: navbar"/>
     <h1 th:if="${! posts.isEmpty()}">Viewing all posts</h1>
     <h1 th:if="${posts.isEmpty()}">Sorry, no results were found</h1>
@@ -10,7 +10,7 @@
         <form class="col-12">
             <div class="form-group">
                 <label for="search">Search Posts</label>
-                <input class="form-control" id="search" type="text" name="search" th:value="${searchTerm}" />
+                <input class="form-control" id="search" type="text" name="search" th:value="${searchTerm}"/>
             </div>
         </form>
     </div>
@@ -19,10 +19,10 @@
             <div class="card-header text-white bg-primary">
                 <h3><span th:text="${post.title}"></span></h3>
             </div>
-            <div class="card-body">
-                <p><span th:text="${post.body}"></span></p>
-            </div>
         </a>
+        <div class="card-body">
+            <p><span th:text="${post.body}"></span></p>
+        </div>
     </div>
 </div>
 <div th:replace="fragments ::footer"/>
