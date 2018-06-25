@@ -10,11 +10,15 @@ public class Post {
     @GeneratedValue
     private long id;
 
-    @Column(name = "post_title", nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "post_body", nullable = false)
+    @Column(name = "body", nullable = false)
     private String body;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 
     public Post() {}
 

@@ -2,17 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: header(${'All Posts'})"/>
 <body>
-<nav th:replace="fragments :: navbar"/>
-<h1>Viewing all posts</h1>
-<div th:each="post : ${posts}" class="card col-6" style="margin: 10px auto; padding: 0;">
-    <a th:href="@{'/posts/' + ${post.id}}">
-    <div class="card-header text-white bg-primary">
-         <h3><span th:text="${post.title}"></span></h3>
+<div class="container">
+    <nav th:replace="fragments :: navbar"/>
+    <h1 th:if="${! posts.isEmpty()}">Viewing all posts</h1>
+    <h1 th:if="${posts.isEmpty()}">Sorry, no results were found</h1>
+    <div class="row">
+        <form class="col-12">
+            <div class="form-group">
+                <label for="search">Search Posts</label>
+                <input class="form-control" id="search" type="text" name="search" th:value="${searchTerm}" />
+            </div>
+        </form>
     </div>
-    <div class="card-body">
-        <p><span th:text="${post.body}"></span></p>
+    <div th:each="post : ${posts}" class="card col-6" style="margin: 10px auto; padding: 0;">
+        <a th:href="@{'/posts/' + ${post.id}}">
+            <div class="card-header text-white bg-primary">
+                <h3><span th:text="${post.title}"></span></h3>
+            </div>
+            <div class="card-body">
+                <p><span th:text="${post.body}"></span></p>
+            </div>
+        </a>
     </div>
-    </a>
 </div>
 <div th:replace="fragments ::footer"/>
 </body>

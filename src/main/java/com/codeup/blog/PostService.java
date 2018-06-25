@@ -8,14 +8,14 @@ import java.util.List;
 
 @Service
 public class PostService {
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
     public List<Post> findAll() {
-        return (List<Post>) postRepository.findAll();
+        return postRepository.findAll();
     }
 
     public Post save(Post post) {
@@ -34,5 +34,12 @@ public class PostService {
     public void deletePost(Long id){
         postRepository.delete(id);
     }
+    public List<Post> search(String searchTerm) {
+         return postRepository.search("%" + searchTerm + "%");
+        }
+
+        public List<Post> searchByTitle(String title){
+        return postRepository.findByTitle(title);
+        }
 
 }
