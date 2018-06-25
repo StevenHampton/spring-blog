@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: header(${'Create Post'})"/>
 <body>
 <div class="container col-12">
     <nav th:replace="fragments :: navbar"/>
+    <div th:replace="fragments :: authorizedInfo"></div>
     <div class="card col-6" style="margin: 10px auto; padding: 0;">
         <div class="card-header text-white bg-primary">
             <h3>Create a Post</h3>
         </div>
         <div class="card-body">
-            <form action="/posts/create" method="post" th:object="${post}">
+            <form th:action="@{/posts/create}" method="post" th:object="${post}">
                 Title:
                 <div class="form-group">
                     <input style="width: 100%" th:field="*{title}"/>

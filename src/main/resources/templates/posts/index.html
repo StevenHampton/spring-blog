@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments :: header(${'All Posts'})"/>
 <body>
 <div class="container col-12">
@@ -8,9 +9,8 @@
     <h1 th:if="${posts.isEmpty()}">Sorry, no results were found</h1>
     <div class="row">
         <form class="col-12">
-            <div class="form-group">
-                <label for="search">Search Posts</label>
-                <input class="form-control" id="search" type="text" name="search" th:value="${searchTerm}"/>
+            <div style="margin: 0 auto" class="form-group col-6">
+                Search Posts:<input class="form-control" id="search" type="text" name="search" th:value="${searchTerm}"/>
             </div>
         </form>
     </div>

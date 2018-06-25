@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: header(${'Register'})"/>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><head th:replace="fragments :: header(${'Register'})"/>
 <body>
 <div class="container col-12">
     <nav th:replace="fragments :: navbar"/>
     <div class="card col-6" style="margin: 10px auto; padding: 0;">
         <div class="card-header text-white bg-primary">
-            <h3>Sign Up</h3>
+            <h1>Create an account</h1>
         </div>
         <div class="card-body">
-            <form action="/user/create" method="post" th:object="${user}">
+            <form th:action="@{/sign-up}" method="POST" th:object="${user}">
                 Username:
                 <div class="form-group">
                     <input style="width: 100%" th:field="*{username}"/>
@@ -20,13 +20,13 @@
                 </div>
                 Password:
                 <div class="form-group">
-                    <input style="width: 100%" th:field="*{password}"/>
+                    <input type="password" style="width: 100%" th:field="*{password}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
-<div th:replace="fragments ::footer"/>
+<div th:replace="fragments ::footer" />
 </body>
 </html>

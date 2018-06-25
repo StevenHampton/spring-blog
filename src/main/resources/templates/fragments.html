@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="header (pageTitle)">
     <meta charset="UTF-8"/>
     <title th:text="${pageTitle}">Template Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
     <style>
-        *{margin: 0; padding: 0;}
-        h1{
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
             align-content: center;
             text-align: center;
         }
@@ -20,12 +25,29 @@
     <ul class="navbar-nav">
         <li class="nav-item"><a href="http://localhost:8080/home" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="http://localhost:8080/posts" class="nav-link">Posts</a></li>
-        <li class="nav-item"><a href="http://localhost:8080/posts/create" class="nav-link">Create Post</a></li>
-        <li class="nav-item"><a href="http://localhost:8080/user/create" class="nav-link">Sign Up</a></li>
+        <div sec:authorize="isAuthenticated()">
+            <li class="nav-item"><a href="http://localhost:8080/posts/create" class="nav-link">Create Post</a></li>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <li class="nav-item"><a href="http://localhost:8080/sign-up" class="nav-link">Sign Up</a></li>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <li class="nav-item"><a href="http://localhost:8080/login" class="nav-link">Log In</a></li>
+        </div>
     </ul>
+    <div sec:authorize="isAuthenticated()">
+        <form class="form-inline" th:action="@{/logout}" th:method="post">
+            <button class="btn btn-sm btn-outline-secondary">Logout</button>
+        </form>
+    </div>
 </nav>
+<div th:fragment="authorizedInfo" sec:authorize="isAuthenticated()">
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+    Email: <span th:text="${#authentication.principal.email}"/>
+</div>
 
-<div th:fragment="footer"  th:remove="tag">
+<div th:fragment="footer" th:remove="tag">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>

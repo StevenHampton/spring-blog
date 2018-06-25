@@ -3,20 +3,20 @@ package com.codeup.blog;
 import com.codeup.blog.models.Post;
 import com.codeup.blog.models.User;
 import com.codeup.blog.repositories.PostRepository;
-import com.codeup.blog.repositories.UserRepository;
+import com.codeup.blog.repositories.Users;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final Users users;
 
-    public PostService(PostRepository postRepository, UserRepository userRepository) {
+    public PostService(PostRepository postRepository, Users users) {
         this.postRepository = postRepository;
-        this.userRepository = userRepository;
+        this.users = users;
     }
 
     public List<Post> findAll() {
@@ -24,7 +24,7 @@ public class PostService {
     }
 
     public Post save(Post post) {
-        User user = userRepository.first();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
         postRepository.save(post);
         return post;
